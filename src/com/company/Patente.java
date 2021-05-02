@@ -18,65 +18,53 @@ public class Patente {
 
 
     public Patente() {
+
     }
 
-    private String generarPrimerosNumeros(){
-        String letras = new String("ABC");
-        Random random = new Random();
-        byte letra1 = (byte)random.nextInt(2);
-        byte letra2 = (byte)random.nextInt(2);
-        System.out.print(letras.charAt(letra1));
-        System.out.print(letras.charAt(letra2));
-        //letras.charAt(letra1);
-        //letras.charAt(letra2);
-        return primeros;
+    public int generarNumAleatorio(){
+        int numAleatorio = 0;
+        numAleatorio = (int) (Math.random()*999+99);
+        return numAleatorio;
     }
 
-    private int generarSegundosNumeros(){
-        Random random = new Random();
-        int uno = random.nextInt(9);
-        int dos = random.nextInt(9);
-        int tres = random.nextInt(9);
-        System.out.print(" "+uno);
-        System.out.print(dos);
-        System.out.print(tres+" ");
-        return segundos;
-    }
-
-    private String generarTercerosNumeros(){
-        String letras = new String("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-        Random random = new Random();
-        byte letra1 = (byte)random.nextInt(letras.length()-1);
-        byte letra2 = (byte)random.nextInt(letras.length()-1);
-        System.out.print(letras.charAt(letra1));
-        System.out.print(letras.charAt(letra2));
-        return terceros;
-    }
-
-    public void asignarPatente(){
-        System.out.print("Numero de patente: ");
-
-        Patente patente = new Patente(generarPrimerosNumeros(),generarSegundosNumeros(),generarTercerosNumeros());
+    public String generarNumPatente(){
+        String patente = "";
+        for(int i=1;i<3;i++){
+            int num = (int )((Math.random()*(('z'-'a')+1))+'a');
+            char letra = (char)num;
+            patente = patente + letra;
+        }
+        return patente.toUpperCase();
     }
 
 
-    public String datosPatente(){
 
-        return " Numero patente: "+generarPrimerosNumeros()+" "+getSegundos()+" "+getTerceros();
-    }
-
+   /* public void ingresarDatosPatenteParaCambio(){
+        Scanner sc = new Scanner(System.in);
+        Dni dni = new Dni();
+        System.out.println("Introduzca los datos de la patente a nombre de: "+dni.getNombre());
+        System.out.println("Ingrese los dos primeros dígitos - (LETRAS entre A y C)");
+        primeros=sc.nextLine().toUpperCase();
+        System.out.println("Ingrese los NUMEROS de la patente");
+        segundos = sc.nextInt();
+        sc.nextLine();
+        System.out.println("Ingrese los dos últimos dígitos - (LETRAS entre la A y Z)");
+        terceros=sc.nextLine().toUpperCase();
+    }*/
 
     public void ingresarDatosPatente(){
         Scanner sc = new Scanner(System.in);
-        System.out.println("Introduzca los datos de la patente: ");
-        System.out.println("Ingrese los primeros digitos - (letras entre A y C)");
-        primeros=sc.nextLine();
-        System.out.println("Ingrese los numeros de la patente");
+        Dni dni = new Dni();
+        System.out.println("Introduzca los datos de la patente a nombre de: "+dni.getNombre());
+        System.out.println("Ingrese los dos primeros dígitos - (LETRAS entre A y C)");
+        primeros=sc.nextLine().toUpperCase();
+        System.out.println("Ingrese los NUMEROS de la patente");                       //USO
         segundos = sc.nextInt();
         sc.nextLine();
-        System.out.println("Ingrese los ultimos digitos de la - (lettras entre la A y Z)");
-        terceros=sc.nextLine();
+        System.out.println("Ingrese los dos últimos dígitos - (LETRAS entre la A y Z)");
+        terceros=sc.nextLine().toUpperCase();
     }
+
 
     public String getPrimeros() {
         return primeros;
@@ -102,14 +90,8 @@ public class Patente {
         this.terceros = terceros;
     }
 
-
-    @Override
-    public String toString() {
-        return "Patente{" +
-                "primeros='" + this.primeros + '\'' +
-                ", segundos=" + this.segundos +
-                ", terceros='" + this.terceros + '\'' +
-                '}';
+    public String datosPatente(){
+        return"Numero de Patente: "+getPrimeros()+" "+getSegundos()+" "+getTerceros();    //USO
     }
 
 }

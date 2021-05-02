@@ -6,15 +6,29 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
-public class Propietario extends Dni implements Comparable<Propietario> {
+public class Propietario extends Dni implements Comparable<Propietario>  {
+
+    @Override
+    public int compareTo(Propietario o) {
+        return getNombre().compareTo(o.getNombre());
+    }
+
+    @Override
+    public String toString() {
+        return "Nombre del propietario/a: "+getNombre()+" Direccion: "+getDireccion();
+    }
 
     private Dni dni;
     private boolean facturaDeCompra;
     private String solicitudTipo;
-    private List<Propietario>propietarios;
+    private List<Propietario> dnis;
 
     public Propietario(String nombre) {
         super(nombre);
+    }
+
+    public Propietario(String nombre, int numDni, String direccion) {
+        super(nombre, numDni, direccion);
     }
 
     public Propietario(Dni dni, boolean facturaDeCompra, String solicitudTipo) {
@@ -22,7 +36,7 @@ public class Propietario extends Dni implements Comparable<Propietario> {
         this.dni = dni;
         this.facturaDeCompra = facturaDeCompra;
         this.solicitudTipo = solicitudTipo;
-        this.propietarios=new ArrayList<>();
+        this.dnis =new ArrayList<>();
     }
 
     public boolean isFacturaDeCompra() {
@@ -32,6 +46,29 @@ public class Propietario extends Dni implements Comparable<Propietario> {
     public boolean setFacturaDeCompra(boolean facturaDeCompra) {
         this.facturaDeCompra = facturaDeCompra;
         return facturaDeCompra;
+    }
+
+    public void ordenarNombres(){
+
+        List<Propietario>propietarios = new ArrayList<>();
+        propietarios.add(new Propietario("Ricardo Lopez",28012322,"San Martin 452"));
+        propietarios.add(new Propietario("Lorena Juanse",12456325,"Moreno 487"));
+        propietarios.add(new Propietario("Zulema Ferragut",35216452,"Lugones 1254"));
+        propietarios.add(new Propietario("Brisa Saturnino",25489654,"Ruibal 78"));
+
+        System.out.println("                      **** NOMBRE DE PROPIETARIOS REGITRADOS **** ");
+        System.out.println(" ");
+        for (Propietario p:propietarios) {
+            System.out.println(p);
+        }
+
+        Collections.sort(propietarios);
+        System.out.println(" ");
+        System.out.println("        **** NOMBRE DE PROPIETARIOS REGITRADOS ORDENADOS ALFABETICAMENTE **** ");
+        System.out.println(" ");
+        for (Propietario p:propietarios) {
+            System.out.println(p);
+        }
     }
 
     public String getSolicitudTipo() {
@@ -53,19 +90,6 @@ public class Propietario extends Dni implements Comparable<Propietario> {
        return datos;
     }
 
-    public void crearPropietario(){
-        Scanner sc = new Scanner(System.in);
-        Dni dni2 = new Dni();
-        dni2.ingresarDatosPropietariosYOtros();
-        System.out.print("Posee factura de compra? ");
-        facturaDeCompra = sc.nextBoolean();
-        sc.nextLine();
-        System.out.print("Ingrese solicitud tipo: ");
-        solicitudTipo = sc.nextLine();
-        List<Propietario>propietarios = new ArrayList<>();
-        propietarios.add(new Propietario(dni2,facturaDeCompra,solicitudTipo));
-    }
-
 
     public Dni getDni() {
         return dni;
@@ -75,58 +99,14 @@ public class Propietario extends Dni implements Comparable<Propietario> {
         this.dni = dni;
     }
 
-    public void ordenarAlfabeticamente(List<Propietario>propietarios){
+    /*public void ordenarAlfabeticamente(List<Propietario>propietarios){
         Collections.sort(propietarios);
+    }*/
+
+    public Propietario crearPropietario( Dni dni, boolean facturaDeCompra, String solicitudTipo) {
+        Propietario nuevoPropietario = new Propietario(dni,facturaDeCompra,solicitudTipo);
+        return nuevoPropietario;
     }
-
-    @Override
-    public int compareTo(Propietario o) {
-        return getNombre().compareTo(o.getNombre());
-    }
-
-    public void listarPropietario(Dni dni,boolean facturaDeCompra,String solicitudTipo){
-        Scanner sc = new Scanner(System.in);
-        Dni dni2 = new Dni();
-        dni2.ingresarDatosPropietariosYOtros();
-        System.out.print("Posee factura de compra? ");
-        facturaDeCompra = sc.nextBoolean();
-        sc.nextLine();
-        System.out.print("Ingrese solicitud tipo: ");
-        solicitudTipo = sc.nextLine();
-        //Propietario propietario = new Propietario();
-        propietarios.add(new Propietario(dni2,facturaDeCompra,solicitudTipo));
-        Collections.sort(propietarios);
-        for (Propietario p: propietarios){
-            System.out.println(p.datosPropietario());
-        }
-    }
-
-    public void ingresarPropietariodeCamiones(){
-        Scanner sc = new Scanner(System.in);
-        int exit = 0;
-        do {
-            String nombre;
-            System.out.println("Ingrese nombre del propietario: ");
-            nombre = sc.next();
-            Dni dni2 = new Dni(nombre);
-            System.out.print("Posee factura de compra? ");
-            facturaDeCompra = sc.nextBoolean();
-            sc.nextLine();
-            System.out.print("Ingrese solicitud tipo: ");
-            solicitudTipo = sc.nextLine();
-            List<Propietario> propietarios = new ArrayList<>();
-            propietarios.add(new Propietario(dni2, facturaDeCompra, solicitudTipo));
-            System.out.println("si desea listar ingrese 1");
-            exit = sc.nextInt();
-            sc.nextLine();
-        }while (exit !=1);
-        Collections.sort(propietarios);
-        for (Propietario p:propietarios) {
-            System.out.println(p.datosPropietario());
-        }
-    }
-
-
 
 
 }

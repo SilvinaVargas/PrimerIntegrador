@@ -1,9 +1,9 @@
 package com.company;
 
 import java.util.*;
-import java.util.concurrent.Callable;
-
 public class Automotor {
+
+
 
     private Propietario propietario;
     private List<AutorizadoAConducir> autorizadosAConducir = new ArrayList<>();
@@ -11,6 +11,8 @@ public class Automotor {
     private Uso uso;
     private Patente patente;
     private Date fecha;
+
+
 
     public Automotor() {
     }
@@ -21,6 +23,12 @@ public class Automotor {
         this.fecha = fecha;
     }
 
+    public Automotor(Propietario propietario, TipoDeVehiculo tipoDeVehiculo, Uso uso) {
+        this.propietario = propietario;
+        this.tipoDeVehiculo = tipoDeVehiculo;
+        this.uso = uso;
+    }
+
     public Automotor(Propietario propietario, TipoDeVehiculo tipoDeVehiculo, Uso uso, Patente patente, Date fecha) {
         this.propietario = propietario;
         this.tipoDeVehiculo = tipoDeVehiculo;
@@ -29,89 +37,16 @@ public class Automotor {
         this.fecha = fecha;
     }
 
-    public void registrarAutomotor(){
-        Scanner sc = new Scanner(System.in);
-        Dni dni = new Dni();
-        dni.ingresarDatosPropietariosYOtros();
-        System.out.print("Tiene factura de compra? ");
-        boolean factura = sc.nextBoolean();
-        sc.nextLine();
-        System.out.print("Ingrese solicitud tipo: ");
-        String solicitud = sc.nextLine();
-        Propietario propietario = new Propietario(dni,factura,solicitud);
-        Date fecha = new Date();
-        System.out.println("");
-        Patente patente = new Patente();
-        patente.asignarPatente();
-        System.out.println("\nIngrese el tipo de vehiculo");
-        System.out.println("0- Moto electrica\n1- Auto electrico\n2- Moto a combustion\n3- Auto a combustion\n4- Colectivo" +
-                "\n5- Utilitario\n6- Camion");
-        int opcionTipoVehiculo = Integer.parseInt(sc.nextLine());
-        TipoDeVehiculo tipoDeVehiculo = TipoDeVehiculo.valueOf(TipoDeVehiculo.values()[opcionTipoVehiculo].name());
-        switch (opcionTipoVehiculo){
-            case 0:
-                TipoDeVehiculo.MOTO_ELECTRICA.name();
-                break;
-            case 1:
-                TipoDeVehiculo.AUTO_ELECTRICO.name();
-                break;
-            case 2:
-                TipoDeVehiculo.MOTO_A_COMBUSTION.name();
-                break;
-            case 3:
-                TipoDeVehiculo.AUTO_A_COMBUSTION.name();
-                break;
-            case 4:
-                TipoDeVehiculo.COLECTIVO.name();
-                break;
-            case 5:
-                TipoDeVehiculo.UTILITARIOS.name();
-                break;
-            case 6:
-                TipoDeVehiculo.CAMION.name();
-                break;
-        }
-
-        System.out.println("Ingrese uso del vehiculo\n0- Particular\n1- Profesional");
-        int numeroUso = Integer.parseInt(sc.nextLine());
-        Uso uso = Uso.valueOf(Uso.values()[numeroUso].name());
-        switch(numeroUso){
-            case 0:
-                Uso.PARTICULAR.name();
-                break;
-            case 1:
-                Uso.PROFESIONAL.name();
-                break;
-        }
-        List<Automotor>automotors = new ArrayList<>();
-        System.out.println("* 1- Si desea agregar otro automotor ingrese numero\n* 2- Si" +
-                "desea listar todos los vehiculos Ingrese\n* 0- Si desea ir al menu principal ");
-        int opcion = sc.nextInt();
-        sc.nextLine();
-        if (opcion == 0){
-            Sistema sistema = new Sistema();
-            sistema.desplegarMenu();
-        }
-        else if (opcion == 1) {
-            agregarAuto();
-        }else
-        if(opcion == 2) {
-        }
-        System.out.println("4444444");
-        System.out.println("Propietario"+propietario.datosPropietario()+"\nTipo de Vehiculo: "+tipoDeVehiculo+"\nPatente: "
-        +patente.datosPatente()+"\nFecha: "+fecha);
-    }
-
-    private void agregarAuto() {
-        registrarAutomotor();
-        List<Automotor>automotors = new ArrayList<>();
-        automotors.add(new Automotor());
+    public List<Automotor> crearAutomotor(Propietario propietario, TipoDeVehiculo tipoDeVehiculo,Uso uso, Patente patente, Date fecha){
+        List<Automotor>nuevosAutomotores = new ArrayList<>();
+        nuevosAutomotores.add(new Automotor(propietario,tipoDeVehiculo,uso,patente,fecha));
+        return nuevosAutomotores;                                                                 //USO
     }
 
     public void cambioDePropietario() {
         Scanner sc = new Scanner(System.in);
         Date fecha = new Date();
-        System.out.println("***** Ingrese los datos del propietario actual del vehiculo *****");
+        System.out.println("***** INGRESE LOS DATOS DEL PROPIETARIO ACTUAL DEL VEHÍCULO *****");
         Dni dni = new Dni();
         dni.ingresarDatosPropietariosYOtros();
         Propietario propietario = new Propietario(dni,true,"01");
@@ -122,12 +57,21 @@ public class Automotor {
         System.out.println("");
         System.out.println(propietario.datosPropietario()+" "+patente.datosPatente());
         System.out.println("");
-        System.out.println("***** Ingrese datos del nuevo dueño *****");
-        System.out.println("");
+        System.out.println("***** INGRESE LOS DATOS DEL NUEVO DUEÑO *****");
+        System.out.println("");                                                        //USO
         dni.cambiarDatospropietario(propietario);
-        System.out.println("DATOS NUEVOS INGRESADOS");
+        System.out.println("");
+        System.out.println("***** LOS NUEVOS DATOS INGRESADOS CORRESPONDEN A: ");
         System.out.println(propietario.datosPropietario()+patente.datosPatente()+"\nFecha de cambio: "+fecha);
-        System.out.println("\nCambio registrado con éxito");
+        System.out.println("\n------- CAMBIO REGISTRADO CON ÉXITO ------");
+    }
+
+    public void ingresarVoltageMoto(){
+
+        Propietario propietario = new Propietario("Soledad Rivas");
+        MotoElectrica me = new MotoElectrica(propietario,TipoDeVehiculo.MOTO_ELECTRICA,Uso.PARTICULAR);
+        Integer moto = me.indicarVoltaje();
+        System.out.println("Propietaria/o: "+propietario.getNombre()+"\nTipo de Vehiculo: "+TipoDeVehiculo.MOTO_ELECTRICA+" "+"\nUso: "+Uso.PARTICULAR);
     }
 
     public void mostrarDatos(){
@@ -137,7 +81,6 @@ public class Automotor {
         System.out.println("tipo: "+tipoDeVehiculo);
         System.out.println("titulas: "+propietario.getNombre());
     }
-
 
 
     @Override
@@ -156,20 +99,56 @@ public class Automotor {
          autorizadosAConducir.add(autorizadoAConducir);
     }
 
-    public void crearAutomotor( Propietario propietario,Patente patente,Date fecha){
-    }
-
     public Propietario buscarTitularXPatente(Patente patente){  //pide los datos
 
         return propietario;
     }
 
-    public void ingresarCamionTipo(){
-        if(tipoDeVehiculo.equals(TipoDeVehiculo.CAMION)){
-            System.out.println("ingresar camion");
-        }
+    public Propietario getPropietario() {
+        return propietario;
     }
 
+    public void setPropietario(Propietario propietario) {
+        this.propietario = propietario;
+    }
 
+    public List<AutorizadoAConducir> getAutorizadosAConducir() {
+        return autorizadosAConducir;
+    }
 
+    public void setAutorizadosAConducir(List<AutorizadoAConducir> autorizadosAConducir) {
+        this.autorizadosAConducir = autorizadosAConducir;
+    }
+
+    public TipoDeVehiculo getTipoDeVehiculo() {
+        return tipoDeVehiculo;
+    }
+
+    public void setTipoDeVehiculo(TipoDeVehiculo tipoDeVehiculo) {
+        this.tipoDeVehiculo = tipoDeVehiculo;
+    }
+
+    public Uso getUso() {
+        return uso;
+    }
+
+    public void setUso(Uso uso) {
+        this.uso = uso;
+    }
+
+    public Patente getPatente() {
+        return patente;
+    }
+
+    public void setPatente(Patente patente) {
+        this.patente = patente;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
 }

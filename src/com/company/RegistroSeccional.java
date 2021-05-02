@@ -14,52 +14,41 @@ public class RegistroSeccional {
     public RegistroSeccional() {
     }
 
-    public RegistroSeccional(int numeroDeSeccional, String ciudad) {
+    public RegistroSeccional(int numeroDeSeccional, String ciudad, String numeroTelefono) throws TelefonoException {
         this.numeroDeSeccional = numeroDeSeccional;
         this.ciudad = ciudad;
+        this.numeroTelefono = numeroTelefono;
+        validarNumeroTelefono(numeroTelefono);
     }
 
-    public RegistroSeccional(int numeroDeSeccional, String ciudad, String numeroTelefono) {
+    public RegistroSeccional(List<Automotor> automotores, int numeroDeSeccional, String ciudad, String numeroTelefono) {
+        this.automotores = automotores;
         this.numeroDeSeccional = numeroDeSeccional;
         this.ciudad = ciudad;
         this.numeroTelefono = numeroTelefono;
     }
 
     public boolean validarNumeroTelefono(String numeroTelefono) throws TelefonoException {
-        if (numeroTelefono.length()<12) {
+        if (numeroTelefono.length()<9) {
             throw new TelefonoException("El numero introducido es demasiado corto, vuelva a ingresarlo");
+
         }
         return true;
     }
 
-    public void agregarRegistro(){
-        Scanner sc = new Scanner(System.in);
-        System.out.print("-- Ingresar numero de Seccional --> ");
-        numeroDeSeccional = sc.nextInt();
-        sc.nextLine();
-        System.out.print("-- Ingrese la ciudad a la que pertenece dicha seccional --> ");
-        ciudad = sc.nextLine();
-        System.out.print("Ingrese el numero de telefono, deberán anteponer al número local el prefijo (+54 9...)--> ");
-        numeroTelefono = sc.nextLine();
+    public List<RegistroSeccional> agregarRegistro(int numeroDeSeccional, String ciudad, String numeroTelefono) throws TelefonoException {
 
         try {
             validarNumeroTelefono(numeroTelefono);
         } catch (TelefonoException e) {
             System.out.println(e.getMessage());;
         }
-
-        List<RegistroSeccional> registroSeccionals = new ArrayList<>();
-        registroSeccionals.add(new RegistroSeccional(numeroDeSeccional,ciudad,numeroTelefono));
-    }
-    public void agregarRegi(int numeroDeSeccional,String ciudad,String numeroTelefono){
-           RegistroSeccional registroSeccional = new RegistroSeccional(numeroDeSeccional,ciudad,numeroTelefono);
-        System.out.println(registroSeccional.toString());
-    }
-
-    public void listarAutomotores(){
-        for (Automotor a: automotores){
-            System.out.println(a.toString());
+        List<RegistroSeccional>registros = new ArrayList<>();
+        registros.add(new RegistroSeccional(numeroDeSeccional, ciudad, numeroTelefono));
+        for (RegistroSeccional r:registros) {
+            System.out.println(r.toString());
         }
+        return registros;
     }
 
     public int getNumeroDeSeccional() {
@@ -89,9 +78,9 @@ public class RegistroSeccional {
     @Override
     public String toString() {
         return "RegistroSeccional{" +
-                "numeroDeSeccional=" + numeroDeSeccional +
-                ", ciudad='" + ciudad + '\'' +
-                ", numeroTelefono='" + numeroTelefono + '\'' +
+                "numeroDeSeccional=" + getNumeroDeSeccional() +
+                ", ciudad='" + getCiudad()+ '\'' +
+                ", numeroTelefono='" + getNumeroTelefono() + '\'' +
                 '}';
     }
 }

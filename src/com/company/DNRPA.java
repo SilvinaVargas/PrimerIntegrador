@@ -2,40 +2,47 @@ package com.company;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class DNRPA {
 
-    List<RegistroSeccional> registros= new ArrayList<>();
+    List<List<RegistroSeccional>> registros= new ArrayList<>();
 
 
     public DNRPA() {
         this.registros= new ArrayList<>();
     }
 
-    RegistroSeccional registro = new RegistroSeccional();
-
-    public void agregarRegistro(RegistroSeccional registro){
-        registros.add(registro);
-    }
-
-    public void ingresarDatosRegistro(){
-        Scanner sc = new Scanner(System.in);
+    public void agregarRegistro(int numeroDeSeccional, String ciudad, String numeroTelefono) throws TelefonoException {
+        /*Scanner sc = new Scanner(System.in);
         System.out.print("-- Ingresar numero de Seccional --> ");
-        int numeroDeSeccional = sc.nextInt();
+        numeroDeSeccional = sc.nextInt();
         sc.nextLine();
         System.out.print("-- Ingrese la ciudad a la que pertenece dicha seccional --> ");
-        String ciudad = sc.nextLine();
+        ciudad = sc.nextLine();
         System.out.print("Ingrese el numero de telefono, deberán anteponer al número local el prefijo (+54 9...)--> ");
-        String numeroTelefono = sc.nextLine();
+        numeroTelefono = sc.nextLine();*/
 
-        RegistroSeccional registroSeccional = new RegistroSeccional(numeroDeSeccional,ciudad,numeroTelefono);
-
-        for(int i=0;i<registros.size();i++){
-            System.out.println(i+"--> "+ registros.get(i).getNumeroDeSeccional());
+        try {
+            validarNumeroTelefono(numeroTelefono);
+        } catch (TelefonoException e) {
+            System.out.println(e.getMessage());
+            ;
         }
-
     }
 
+    private boolean validarNumeroTelefono(String numeroTelefono) throws TelefonoException {
+        if (numeroTelefono.length()<12) {
+            throw new TelefonoException("El numero introducido es demasiado corto, vuelva a ingresarlo");
+        }
+        return true;
+    }
+
+    public void listarRegistros(List<RegistroSeccional>registross){
+        registros.add(registross);
+
+        for (RegistroSeccional r:registross) {
+            System.out.println(r.toString());
+        }
+    }
 
 }

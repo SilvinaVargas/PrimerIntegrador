@@ -21,6 +21,11 @@ public class Dni {
         this.direccion = direccion;
     }
 
+    public Dni crearDni(String nombre, int numDni, String direccion){         //USO
+        Dni nuevoDni = new Dni(nombre, numDni,direccion);
+        return nuevoDni;
+    }
+
     public String getNombre() {
         return nombre;
     }
@@ -54,7 +59,7 @@ public class Dni {
         System.out.print("Ingrese num de Dni: ");
         numDni = sc.nextInt();
         sc.nextLine();
-        System.out.print("Ingrese direccion: ");
+        System.out.print("Ingrese direccion: ");          //USO
         direccion = sc.nextLine();
     }
 
@@ -66,7 +71,7 @@ public class Dni {
         setNombre(sc.nextLine());
         System.out.println("Ingrese num de Dni: ");
         setNumDni(sc.nextInt());
-        sc.nextLine();
+        sc.nextLine();                                            //USO
         System.out.println("Ingrese direccion: ");
         setDireccion(sc.nextLine());
     }
@@ -83,4 +88,6 @@ public class Dni {
                 "nombre='" + nombre + '\'' +
                 '}';
     }
+
+
 }
