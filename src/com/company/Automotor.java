@@ -3,8 +3,6 @@ package com.company;
 import java.util.*;
 public class Automotor {
 
-
-
     private Propietario propietario;
     private List<AutorizadoAConducir> autorizadosAConducir = new ArrayList<>();
     private TipoDeVehiculo tipoDeVehiculo;
@@ -12,9 +10,12 @@ public class Automotor {
     private Patente patente;
     private Date fecha;
 
-
-
     public Automotor() {
+    }
+
+    public Automotor(Propietario propietario, Patente patente) {
+        this.propietario = propietario;
+        this.patente = patente;
     }
 
     public Automotor(Propietario propietario, Patente patente, Date fecha) {
@@ -43,7 +44,7 @@ public class Automotor {
         return nuevosAutomotores;                                                                 //USO
     }
 
-    public void cambioDePropietario() {
+    /*public void cambioDePropietario() {
         Scanner sc = new Scanner(System.in);
         Date fecha = new Date();
         System.out.println("***** INGRESE LOS DATOS DEL PROPIETARIO ACTUAL DEL VEHÍCULO *****");
@@ -64,10 +65,9 @@ public class Automotor {
         System.out.println("***** LOS NUEVOS DATOS INGRESADOS CORRESPONDEN A: ");
         System.out.println(propietario.datosPropietario()+patente.datosPatente()+"\nFecha de cambio: "+fecha);
         System.out.println("\n------- CAMBIO REGISTRADO CON ÉXITO ------");
-    }
+    }*/
 
     public void ingresarVoltageMoto(){
-
         Propietario propietario = new Propietario("Soledad Rivas");
         MotoElectrica me = new MotoElectrica(propietario,TipoDeVehiculo.MOTO_ELECTRICA,Uso.PARTICULAR);
         Integer moto = me.indicarVoltaje();
@@ -150,5 +150,25 @@ public class Automotor {
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+
+    public Automotor preguntarXPatente(String primero, int segundo, String tercero) {
+        String [] nombres = {"Andrea Lima","Karina Morelo","Griselda Fernandez","Florencia Chart","Lorena Flores"};
+        String nombre = new String();
+        for(int i=0;i<1;i++){
+            nombre=nombres[(int)(Math.random()*5)];
+        }
+
+        String [] direcciones = {"San Martin 458","Moreno 478","Ruibal 789","La Rioja 78","Uriburu 896"};
+        String direccion = new String();
+        for(int i=0;i<1;i++){
+            direccion=direcciones[(int)(Math.random()*5)];
+        }
+        Dni dni = new Dni(nombre,29658457,direccion);
+        Propietario propietario = new Propietario(nombre);
+        Patente patente = new Patente(primero,segundo,tercero);
+        Automotor automotor = new Automotor(propietario,patente);
+        System.out.println(patente.datosPatente()+"\nNombre del Propietario: "+propietario.getNombre()+"\nDni: "+dni.getNumDni()+"\nDireccion: "+dni.getDireccion());
+        return  automotor;
     }
 }

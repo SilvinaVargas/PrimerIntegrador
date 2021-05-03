@@ -90,7 +90,6 @@ public class Propietario extends Dni implements Comparable<Propietario>  {
        return datos;
     }
 
-
     public Dni getDni() {
         return dni;
     }
@@ -98,10 +97,6 @@ public class Propietario extends Dni implements Comparable<Propietario>  {
     public void setDni(Dni dni) {
         this.dni = dni;
     }
-
-    /*public void ordenarAlfabeticamente(List<Propietario>propietarios){
-        Collections.sort(propietarios);
-    }*/
 
     public Propietario crearPropietario( Dni dni, boolean facturaDeCompra, String solicitudTipo) {
         Propietario nuevoPropietario = new Propietario(dni,facturaDeCompra,solicitudTipo);
