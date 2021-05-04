@@ -164,7 +164,14 @@ public class Automotor {
         for(int i=0;i<1;i++){
             direccion=direcciones[(int)(Math.random()*5)];
         }
-        Dni dni = new Dni(nombre,29658457,direccion);
+
+        Random numero = new Random();
+        int numDni = 0;
+        for(int i=0;i<9;i++){
+            numDni=(numero.nextInt(38999999-18456365+1)+18456365);
+        }
+
+        Dni dni = new Dni(nombre,numDni,direccion);
         Propietario propietario = new Propietario(nombre);
         Patente patente = new Patente(primero,segundo,tercero);
         Automotor automotor = new Automotor(propietario,patente);
