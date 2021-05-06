@@ -37,7 +37,7 @@ public class Sistema {
             System.out.println("( 2 ) Registrar un Automotor");
             System.out.println("( 3 ) Cambiar Propietario");
             System.out.println("( 4 ) Dar de alta un Automotor");
-            System.out.println("( 5 ) Ordenar Alfabéticamente los nombres de propietarios");
+            System.out.println("( 5 ) Ordenar Alfabéticamente los nombres de propietarios de camiones");
             System.out.println("( 6 ) Indicar voltaje de moto eléctrica");
             System.out.println("( 0 ) Salir del sistema");
 
@@ -260,7 +260,6 @@ public class Sistema {
                     break;
                 case 5:
                     automotor.ordenarNombrePropietario();
-                    //propietario.ordenarNombres();
                     do {
                         System.out.println("Presione 0 para volver al menú principal");
                         volverMenu = Integer.parseInt(sc.nextLine());
