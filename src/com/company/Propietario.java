@@ -48,29 +48,6 @@ public class Propietario extends Dni implements Comparable<Propietario>  {
         return facturaDeCompra;
     }
 
-    public void ordenarNombres(){
-
-        List<Propietario>propietarios = new ArrayList<>();
-        propietarios.add(new Propietario("Ricardo Lopez",28012322,"San Martin 452"));
-        propietarios.add(new Propietario("Lorena Juanse",12456325,"Moreno 487"));
-        propietarios.add(new Propietario("Zulema Ferragut",35216452,"Lugones 1254"));
-        propietarios.add(new Propietario("Brisa Saturnino",25489654,"Ruibal 78"));
-
-        System.out.println("                      **** NOMBRE DE PROPIETARIOS REGITRADOS **** ");
-        System.out.println(" ");
-        for (Propietario p:propietarios) {
-            System.out.println(p);
-        }
-
-        Collections.sort(propietarios);
-        System.out.println(" ");
-        System.out.println("        **** NOMBRE DE PROPIETARIOS REGITRADOS ORDENADOS ALFABETICAMENTE **** ");
-        System.out.println(" ");
-        for (Propietario p:propietarios) {
-            System.out.println(p);
-        }
-    }
-
     public String getSolicitudTipo() {
         return solicitudTipo;
     }

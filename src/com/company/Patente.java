@@ -38,20 +38,6 @@ public class Patente {
     }
 
 
-
-   /* public void ingresarDatosPatenteParaCambio(){
-        Scanner sc = new Scanner(System.in);
-        Dni dni = new Dni();
-        System.out.println("Introduzca los datos de la patente a nombre de: "+dni.getNombre());
-        System.out.println("Ingrese los dos primeros dígitos - (LETRAS entre A y C)");
-        primeros=sc.nextLine().toUpperCase();
-        System.out.println("Ingrese los NUMEROS de la patente");
-        segundos = sc.nextInt();
-        sc.nextLine();
-        System.out.println("Ingrese los dos últimos dígitos - (LETRAS entre la A y Z)");
-        terceros=sc.nextLine().toUpperCase();
-    }*/
-
     public void ingresarDatosPatente(){
         Scanner sc = new Scanner(System.in);
         Dni dni = new Dni();

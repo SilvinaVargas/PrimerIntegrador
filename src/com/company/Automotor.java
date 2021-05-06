@@ -1,7 +1,7 @@
 package com.company;
 
 import java.util.*;
-public class Automotor {
+public class Automotor implements Comparable<Propietario> {
 
     private Propietario propietario;
     private List<AutorizadoAConducir> autorizadosAConducir = new ArrayList<>();
@@ -44,28 +44,6 @@ public class Automotor {
         return nuevosAutomotores;                                                                 //USO
     }
 
-    /*public void cambioDePropietario() {
-        Scanner sc = new Scanner(System.in);
-        Date fecha = new Date();
-        System.out.println("***** INGRESE LOS DATOS DEL PROPIETARIO ACTUAL DEL VEHÍCULO *****");
-        Dni dni = new Dni();
-        dni.ingresarDatosPropietariosYOtros();
-        Propietario propietario = new Propietario(dni,true,"01");
-        Patente patente = new Patente();
-        patente.ingresarDatosPatente();
-        System.out.println("*************************************************************");
-        System.out.println("DATOS DEL VEHICULO INGRESADO PARA TRÁMITE DE CAMBIO DE DUEÑO: ");
-        System.out.println("");
-        System.out.println(propietario.datosPropietario()+" "+patente.datosPatente());
-        System.out.println("");
-        System.out.println("***** INGRESE LOS DATOS DEL NUEVO DUEÑO *****");
-        System.out.println("");                                                        //USO
-        dni.cambiarDatospropietario(propietario);
-        System.out.println("");
-        System.out.println("***** LOS NUEVOS DATOS INGRESADOS CORRESPONDEN A: ");
-        System.out.println(propietario.datosPropietario()+patente.datosPatente()+"\nFecha de cambio: "+fecha);
-        System.out.println("\n------- CAMBIO REGISTRADO CON ÉXITO ------");
-    }*/
 
     public void ingresarVoltageMoto(){
         Propietario propietario = new Propietario("Soledad Rivas");
@@ -73,15 +51,6 @@ public class Automotor {
         Integer moto = me.indicarVoltaje();
         System.out.println("Propietaria/o: "+propietario.getNombre()+"\nTipo de Vehiculo: "+TipoDeVehiculo.MOTO_ELECTRICA+" "+"\nUso: "+Uso.PARTICULAR);
     }
-
-    public void mostrarDatos(){
-        System.out.println("patente: "+patente);
-        System.out.println("fecha: "+fecha);
-        System.out.println("uso: "+uso);
-        System.out.println("tipo: "+tipoDeVehiculo);
-        System.out.println("titulas: "+propietario.getNombre());
-    }
-
 
     @Override
     public String toString() {
@@ -177,5 +146,40 @@ public class Automotor {
         Automotor automotor = new Automotor(propietario,patente);
         System.out.println(patente.datosPatente()+"\nNombre del Propietario: "+propietario.getNombre()+"\nDni: "+dni.getNumDni()+"\nDireccion: "+dni.getDireccion());
         return  automotor;
+    }
+
+
+    public void ordenarNombrePropietario() {
+        List<Propietario>propietarios = new ArrayList<>();
+        propietarios.add(new Propietario("Ricardo Lopez",28012322,"San Martin 452"));
+        propietarios.add(new Propietario("Lorena Juanse",12456325,"Moreno 487"));
+        propietarios.add(new Propietario("Zulema Ferragut",35216452,"Lugones 1254"));
+        propietarios.add(new Propietario("Brisa Saturnino",25489654,"Ruibal 78"));
+
+        System.out.println("                      **** NOMBRE DE PROPIETARIOS REGITRADOS **** ");
+        System.out.println(" ");
+        for (Propietario p:propietarios) {
+            System.out.println("NOMBRE: "+p.getNombre()+"\nNUMERO DNI:"+p.getNumDni()+"\nDIRECCION: "+p.getDireccion()+
+                    "\nTIPO DE VEHICULO: "+TipoDeVehiculo.CAMION+"\nUSO: "+Uso.PROFESIONAL+"\n\n");
+
+        }
+
+        Collections.sort(propietarios);
+
+        System.out.println(" ");
+        System.out.println("        **** NOMBRE DE PROPIETARIOS REGITRADOS ORDENADOS ALFABETICAMENTE **** ");
+        System.out.println(" ");
+        for (Propietario p:propietarios) {
+            System.out.println("NOMBRE: "+p.getNombre()+"\nNUMERO DNI:"+p.getNumDni()+"\nDIRECCION: "+p.getDireccion()+
+                    "\nTIPO DE VEHICULO: "+TipoDeVehiculo.CAMION+"\nUSO: "+Uso.PROFESIONAL+"\n\n");
+
+        }
+
+
+    }
+
+    @Override
+    public int compareTo(Propietario o) {
+        return o.getNombre().compareTo(o.getNombre());
     }
 }

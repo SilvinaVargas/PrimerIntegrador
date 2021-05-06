@@ -259,7 +259,8 @@ public class Sistema {
                     } while (volverMenu != 1 && volverMenu !=0);
                     break;
                 case 5:
-                    propietario.ordenarNombres();
+                    automotor.ordenarNombrePropietario();
+                    //propietario.ordenarNombres();
                     do {
                         System.out.println("Presione 0 para volver al menú principal");
                         volverMenu = Integer.parseInt(sc.nextLine());
